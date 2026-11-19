@@ -13,30 +13,35 @@
     <div class="pagina-container">
         <!-- CABEÇALHO -->
         <header class="navbar">
-            <div class="logo-container">
-                <img class="logo-imagem" src="img/logo.png" alt="" width="50" height="50">
-
-                <span class="logo-text">Café &amp; Grãos</span>
+            <div class="nav-brand logo-container">
+                <div class="logo-circle">
+                    <img class="logo-imagem"
+                         src="img/logo.png"
+                         alt="Logo Café & Grãos">
+                </div>
+                <span class="brand-name logo-text">Café &amp; Grãos</span>
             </div>
 
             <nav class="nav-links" aria-label="Navegação principal">
-                <a href="../HOME/inicial.html">Início</a>
-                <a href="../TELA DESTAQUES/destaques.html">Destaques</a>
-                <a href="../TELA PERFIL/perfil.html">Quiz</a>
-                <a href="../TELA PREFERENCIAS/preferencias.html">Preferências</a>
-                <a href="#cafes">Cafés</a>
-                <a href="#metodos">Métodos</a>
+                <a href="../HOME/inicial.html" class="nav-item">Início</a>
+                <a href="../TELA DESTAQUES/destaques.html" class="nav-item">Destaques</a>
+                <a href="../TELA PERFIL/perfil.html" class="nav-item">Quiz</a>
+                <a href="../TELA PREFERENCIAS/preferencias.html" class="nav-item">Preferências</a>
+                <a href="#cafes" class="nav-item">Cafés</a>
+                <a href="#metodos" class="nav-item">Métodos</a>
             </nav>
 
-            <div class="botoes-topo" id="botoes-topo-produtos">
-                <a href="../TELA LOGIN/login.html" class="btn-sair">Login</a>
+            <div class="auth-container botoes-topo" id="botoes-topo-produtos">
+                <a href="../TELA LOGIN/login.html" class="btn-secondary btn-auth">Login</a>
+                <a href="../TELA CADASTRO/cadastro.html" class="btn-primary btn-auth">Cadastro</a>
             </div>
+
             <!-- Botões de acessibilidade para ajustar a fonte e alternar o tema -->
-    <div class="barra-acessibilidade" role="group" aria-label="Ferramentas de acessibilidade">
-        <button type="button" id="diminuir-fonte">A-</button>
-        <button type="button" id="aumentar-fonte">A+</button>
-        <button type="button" id="alternar-tema">Escuro</button>
-    </div>
+            <div class="barra-acessibilidade" role="group" aria-label="Ferramentas de acessibilidade">
+                <button type="button" id="diminuir-fonte" aria-label="Diminuir tamanho da fonte" title="Diminuir fonte">A-</button>
+                <button type="button" id="aumentar-fonte" aria-label="Aumentar tamanho da fonte" title="Aumentar fonte">A+</button>
+                <button type="button" id="alternar-tema" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+            </div>
         </header>
 
         <main id="inicio">

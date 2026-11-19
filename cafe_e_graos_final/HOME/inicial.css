@@ -80,7 +80,7 @@ a:focus-visible {
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--cor-taupe);
-    background-color: #FFFFFF;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,6 +90,8 @@ a:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.65); /* Ajuste entre 1.5 e 1.8 conforme o encaixe */
+    mix-blend-mode: multiply;
 }
 
 .brand-name {
@@ -104,16 +106,28 @@ a:focus-visible {
     gap: 24px;
 }
 
-.nav-item {
+.nav-item,
+.nav-links a {
+    display: inline-block;
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
     text-decoration: none;
     color: var(--cor-marrom-medio);
     font-size: 0.95rem;
     font-weight: 500;
+    line-height: 1.6;
     transition: color 0.3s;
 }
 
 .nav-item:hover,
-.nav-item.active {
+.nav-item.active,
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: transparent !important;
     color: var(--cor-marrom-cafe);
     font-weight: 700;
 }
@@ -436,47 +450,48 @@ a:focus-visible {
     color: var(--cor-taupe);
 }
 
-/* BARRA DE ACESSIBILIDADE */
+/* BARRA DE ACESSIBILIDADE VERTICAL */
 
 .barra-acessibilidade {
     position: fixed;
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
-    z-index: 1100;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
-    background-color: #FFFFFF;
-    border: 1px solid var(--cor-bege);
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(61, 36, 23, 0.16);
+
+    z-index: 1000;
+    width: max-content;
 }
 
 .barra-acessibilidade button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    background-color: #C87D55;
+
+    width: 45px;
+    height: 45px;
+    padding: 0;
+
+    background-color: var(--cor-marrom-cafe);
     color: #FFFFFF;
-    font-size: 16px;
-    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .barra-acessibilidade button:hover {
-    background-color: #A65D37;
-    transform: scale(1.05);
+    background-color: var(--cor-taupe);
 }
 
 .barra-acessibilidade button:focus-visible {
-    outline: 3px solid #2C1E16;
+    outline: 3px solid var(--cor-marrom-cafe);
     outline-offset: 3px;
 }
 
@@ -501,6 +516,26 @@ body.modo-escuro {
     border-color: var(--escuro-borda);
 }
 
+.modo-escuro .logo-circle {
+    background-color: var(--escuro-texto);
+}
+
+.modo-escuro .logo-circle img {
+    mix-blend-mode: multiply;
+}
+
+.modo-escuro .nav-item,
+.modo-escuro .nav-links a {
+    color: var(--escuro-secundario);
+}
+
+.modo-escuro .nav-item:hover,
+.modo-escuro .nav-item.active,
+.modo-escuro .nav-links a:hover,
+.modo-escuro .nav-links a.active {
+    color: var(--escuro-destaque);
+}
+
 .modo-escuro .btn-primary {
     background-color: var(--escuro-destaque);
     color: var(--escuro-fundo);
@@ -520,20 +555,15 @@ body.modo-escuro {
     color: var(--escuro-fundo);
 }
 
-.modo-escuro .barra-acessibilidade {
-    background-color: var(--escuro-superficie);
-    border-color: var(--escuro-borda);
-}
-
 .modo-escuro .barra-acessibilidade button {
-    background-color: var(--escuro-campo);
+    background-color: var(--escuro-superficie);
     color: var(--escuro-texto);
     border: 1px solid var(--escuro-borda);
 }
 
 .modo-escuro .barra-acessibilidade button:hover {
-    background-color: var(--escuro-destaque);
-    color: var(--escuro-fundo);
+    background-color: var(--escuro-campo);
+    color: var(--escuro-destaque);
 }
 
 .modo-escuro button:focus-visible {
@@ -589,7 +619,6 @@ body.modo-escuro {
 
     .barra-acessibilidade {
         left: 6px;
-        padding: 6px;
         gap: 6px;
     }
 

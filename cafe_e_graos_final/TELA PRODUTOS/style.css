@@ -57,15 +57,14 @@
 *::before,
 *::after {
     box-sizing: border-box;
-}
-
-* {
     margin: 0;
     padding: 0;
 }
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 110px;
 }
 
 body {
@@ -97,6 +96,7 @@ button {
 
 a {
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
 img,
@@ -135,8 +135,8 @@ p {
 }
 
 :where(a, button, summary, input, select, textarea):focus-visible {
-    outline: 3px solid var(--borda-destaque);
-    outline-offset: 4px;
+    outline: 3px solid var(--cor-marrom-cafe);
+    outline-offset: 3px;
 }
 
 button:disabled {
@@ -151,25 +151,39 @@ button:disabled {
 
 .pagina-container {
     width: 100%;
+    max-width: none;
     min-width: 0;
     min-height: 100vh;
     display: flex;
     flex: 1;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
     background-color: var(--fundo);
 }
 
 .container {
     width: 100%;
+    max-width: 100%;
     min-width: 0;
     margin-inline: auto;
     padding-inline: var(--margem-lateral);
 }
 
 main,
-.conteudo-principal {
+.conteudo-principal,
+footer,
+.footer {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
     flex: 1;
     min-width: 0;
+}
+
+footer,
+.footer {
+    flex: initial;
 }
 
 .inicio,
@@ -192,70 +206,62 @@ main,
 
 
 /* ==================================================
-   CABEÇALHO
+   CABEÇALHO / NAVBAR PADRONIZADA
    ================================================== */
 
-.navbar {
-    width: 100%;
-    background-color: var(--fundo);
-    border-bottom: 1px solid var(--borda-destaque);
-}
-
-/* Atende ao cabeçalho com ou sem uma div .topo */
+.navbar,
 .navbar:not(:has(.topo)),
 .navbar .topo {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: 12px 24px;
-    padding-block: 15px;
-}
-
-.navbar:not(:has(.topo)) {
-    padding-inline: var(--margem-lateral);
-}
-
-.navbar .topo {
+    align-items: center;
+    gap: 20px;
     width: 100%;
-    padding-inline: var(--margem-lateral);
+    max-width: none;
+    margin-inline: 0;
+    padding: 16px 40px;
+    background-color: var(--fundo);
+    border-bottom: 1px solid var(--borda-destaque);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo-container,
-.nav-brand {
+.nav-brand,
+.logo-container {
     display: flex;
     align-items: center;
     gap: 12px;
     text-decoration: none;
 }
 
-.logo-icon,
 .logo-circle {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
+    border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--borda-destaque);
-    border-radius: 50%;
-    background-color: #ffffff;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo-icon {
-    background-image: url("img/logo.jpeg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.logo-icon img,
-.logo-circle img {
+.logo-circle img,
+.logo-imagem {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 50%;
+    transform: scale(1.65);
+    mix-blend-mode: multiply;
 }
 
-.logo-text,
-.brand-name {
+.brand-name,
+.logo-text {
     color: var(--texto);
     font-size: 1.25rem;
     font-weight: 700;
@@ -265,13 +271,14 @@ main,
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
+    gap: 24px;
+    width: auto;
 }
 
 .nav-links a,
 .nav-item {
     color: var(--texto-suave);
-    font-size: var(--texto-padrao);
+    font-size: 0.95rem;
     font-weight: 500;
     text-decoration: none;
     transition: color var(--transicao);
@@ -283,14 +290,24 @@ main,
 .nav-links .nav-item-activte,
 .nav-item.active {
     color: var(--texto);
-    font-weight: 600;
+    font-weight: 700;
 }
 
+.auth-container,
 .botoes-topo {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+}
+
+.btn-auth {
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 8px 18px !important;
+    font-size: 0.85rem !important;
+    border-radius: 8px !important;
+    white-space: nowrap;
 }
 
 .user-name,
@@ -749,10 +766,59 @@ footer,
 
 
 /* ==================================================
+   BARRA DE ACESSIBILIDADE VERTICAL
+   ================================================== */
+
+.barra-acessibilidade {
+    position: fixed;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    z-index: 1000;
+    width: max-content;
+}
+
+.barra-acessibilidade button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+    padding: 0;
+
+    background-color: var(--cor-marrom-cafe);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.barra-acessibilidade button:hover {
+    background-color: var(--cor-taupe);
+}
+
+.barra-acessibilidade button:focus-visible {
+    outline: 3px solid var(--cor-marrom-cafe);
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
    TEMA ESCURO — TONS DA MARCA
    ================================================== */
 
-body.tema-escuro {
+body.tema-escuro,
+body.modo-escuro {
     color-scheme: dark;
 
     --fundo: #211914;
@@ -768,6 +834,150 @@ body.tema-escuro {
     --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
+body.tema-escuro .navbar,
+body.tema-escuro .footer {
+    background-color: var(--superficie);
+    border-color: var(--borda);
+}
+
+body.tema-escuro .logo-circle {
+    background-color: var(--texto);
+}
+
+body.tema-escuro .barra-acessibilidade button {
+    background-color: var(--superficie);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+}
+
+body.tema-escuro .barra-acessibilidade button:hover {
+    background-color: var(--superficie-apoio);
+    color: var(--borda-destaque);
+}
+
+body.tema-escuro .barra-acessibilidade button:focus-visible {
+    outline: 3px solid var(--borda-destaque);
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
+   GALERIAS INDEPENDENTES E MÉTODOS
+   ================================================== */
+
+.cafes .galeria-cafe {
+    position: relative;
+    height: clamp(240px, 24vw, 360px);
+    isolation: isolate;
+}
+
+.cafes .galeria-cafe .foto-produto {
+    object-fit: cover;
+}
+
+.cafes .galeria-cafe .foto-barista {
+    object-fit: contain;
+    background-color: var(--superficie-apoio);
+}
+
+.cafes .galeria-cafe .seta-foto {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-botao);
+    background-color: var(--superficie);
+    color: var(--texto);
+    font-size: 28px;
+    line-height: 1;
+    transform: translateY(-50%);
+    box-shadow: var(--sombra-card);
+    transition: background-color var(--transicao), color var(--transicao);
+}
+
+.cafes .galeria-cafe .seta-foto:hover {
+    background-color: var(--acao);
+    color: var(--texto-botao);
+}
+
+.cafes .galeria-cafe .seta-foto-anterior {
+    left: 10px;
+}
+
+.cafes .galeria-cafe .seta-foto-proxima {
+    right: 10px;
+}
+
+.cafes .galeria-cafe .contador-fotos {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    padding: 3px 10px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-botao);
+    background-color: var(--superficie);
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: 600;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.metodos .grade-metodos {
+    --colunas-metodos: 3;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-template-rows: auto;
+    grid-auto-columns: calc(
+        (100% - (var(--colunas-metodos) - 1) * var(--espaco-grid))
+        / var(--colunas-metodos)
+    );
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+    gap: var(--espaco-grid);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--borda-destaque) var(--fundo);
+    padding-block: 4px 16px;
+}
+
+.metodos .grade-metodos > .metodo {
+    min-width: 0;
+    padding: 16px;
+    gap: 0;
+    scroll-snap-align: start;
+}
+
+.metodos .grade-metodos .metodo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: contain;
+    border-radius: var(--raio-imagem);
+}
+
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
 
 /* ==================================================
    TABLET
@@ -777,6 +987,14 @@ body.tema-escuro {
     :root {
         --espaco-grid: 24px;
         --padding-card: 24px;
+    }
+
+    .navbar,
+    .navbar:not(:has(.topo)),
+    .navbar .topo {
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 16px;
     }
 
     .inicio-conteudo,
@@ -790,6 +1008,7 @@ body.tema-escuro {
 
     .grade-metodos {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        --colunas-metodos: 2;
     }
 }
 
@@ -806,28 +1025,28 @@ body.tema-escuro {
         --titulo-secao: 1.75rem;
     }
 
+    .navbar,
     .navbar:not(:has(.topo)),
     .navbar .topo {
-        gap: 16px;
+        padding: 14px 10px;
+        gap: 14px;
     }
 
-    .logo-text,
-    .brand-name {
+    .brand-name,
+    .logo-text {
         font-size: 1.1rem;
     }
 
-    .nav-links {
-        order: 1;
-        width: 100%;
+    .nav-links,
+    .auth-container,
+    .botoes-topo {
+        justify-content: center;
         gap: 12px 18px;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .nav-item {
         font-size: 0.9rem;
-    }
-
-    .botoes-topo {
-        gap: 8px;
     }
 
     .inicio,
@@ -851,12 +1070,17 @@ body.tema-escuro {
         height: 200px;
     }
 
+    .cafes .galeria-cafe {
+        height: 300px;
+    }
+
     .modo-visualizacao {
         justify-content: flex-start;
     }
 
     .grade-metodos {
         grid-template-columns: 1fr;
+        --colunas-metodos: 1;
     }
 
     .rodape,
@@ -876,174 +1100,11 @@ body.tema-escuro {
         --transicao: 0s;
     }
 
+    html {
+        scroll-behavior: auto;
+    }
+
     .cafes .grade-cafes {
         scroll-behavior: auto;
     }
-}
-
-/* Galerias independentes: uma para cada café */
-.logo-imagem { flex-shrink: 0; object-fit: contain; border-radius: 50%; }
-.cafes .galeria-cafe {
-    position: relative;
-    height: clamp(240px, 24vw, 360px);
-    isolation: isolate;
-}
-.cafes .galeria-cafe .foto-produto { object-fit: cover; }
-.cafes .galeria-cafe .foto-barista {
-    object-fit: contain;
-    background-color: var(--superficie-apoio);
-}
-.cafes .galeria-cafe .seta-foto {
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 1px solid var(--borda);
-    border-radius: var(--raio-botao);
-    background-color: var(--superficie);
-    color: var(--texto);
-    font-size: 28px;
-    line-height: 1;
-    transform: translateY(-50%);
-    box-shadow: var(--sombra-card);
-    transition: background-color var(--transicao), color var(--transicao);
-}
-.cafes .galeria-cafe .seta-foto:hover {
-    background-color: var(--acao);
-    color: var(--texto-botao);
-}
-.cafes .galeria-cafe .seta-foto-anterior { left: 10px; }
-.cafes .galeria-cafe .seta-foto-proxima { right: 10px; }
-.cafes .galeria-cafe .contador-fotos {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    padding: 3px 10px;
-    border: 1px solid var(--borda);
-    border-radius: var(--raio-botao);
-    background-color: var(--superficie);
-    color: var(--texto);
-    font-size: 12px;
-    font-weight: 600;
-    transform: translateX(-50%);
-    pointer-events: none;
-}
-@media (max-width: 600px) {
-    .cafes .galeria-cafe { height: 300px; }
-}
-
-
-/* Métodos de preparo — carrossel independente */
-.metodos .grade-metodos {
-    --colunas-metodos: 3;
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    grid-template-rows: auto;
-    grid-auto-columns: calc(
-        (100% - (var(--colunas-metodos) - 1) * var(--espaco-grid))
-        / var(--colunas-metodos)
-    );
-    align-items: start;
-    width: 100%;
-    min-width: 0;
-    gap: var(--espaco-grid);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--borda-destaque) var(--fundo);
-    padding-block: 4px 16px;
-}
-.metodos .grade-metodos > .metodo {
-    min-width: 0;
-    padding: 16px;
-    gap: 0;
-    scroll-snap-align: start;
-}
-.metodos .grade-metodos .metodo img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 2 / 3;
-    object-fit: contain;
-    border-radius: var(--raio-imagem);
-}
-.visualmente-oculto {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
-}
-@media (max-width: 900px) {
-    .metodos .grade-metodos { --colunas-metodos: 2; }
-}
-@media (max-width: 600px) {
-    .metodos .grade-metodos { --colunas-metodos: 1; }
-}
-
-
-/* Navbar de ponta a ponta; conteúdo limitado a 1200px */
-.pagina-container {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-}
-.navbar,
-.navbar .topo {
-    width: 100%;
-    max-width: none;
-    margin-inline: 0;
-}
-main,
-.conteudo-principal,
-footer,
-.footer {
-    width: 100%;
-    max-width: 1200px;
-    margin-inline: auto;
-}
-.container {
-    width: 100%;
-    max-width: 100%;
-    margin-inline: auto;
-    padding-inline: var(--margem-lateral);
-}
-
-/* Barra de acessibilidade lateral */
-.barra-acessibilidade {
-    position: fixed;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 1000;
-}
-.barra-acessibilidade button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    padding: 0;
-    background-color: var(--cor-marrom-cafe);
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
 }

@@ -200,6 +200,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // GERENCIAMENTO DE SESSÃO NO LOCALSTORAGE (NAVBAR)
+
+    function atualizarNavbarSessao() {
+        const authContainer = document.getElementById("auth-container");
+        if (!authContainer) return;
+
+        let sessao = null;
+        try {
+            sessao = JSON.parse(localStorage.getItem("cafe_sessao") || "null");
+        } catch (e) {
+            sessao = null;
+        }
+
+        if (sessao && sessao.logado) {
+            const primeiroNome = sessao.primeiroNome || (sessao.nome ? sessao.nome.split(" ")[0] : "Cliente");
+            authContainer.innerHTML = `
+                <span class="nav-user" style="padding: 6px 12px; border-radius: 6px; background: var(--cor-bege); color: var(--cor-marrom-cafe); font-weight: 600; font-size: 0.9rem;">Olá, ${primeiroNome}</span>
+                <button type="button" id="btn-sair-home" class="btn-secondary btn-auth">Sair</button>
+            `;
+
+            const btnSairHome = document.getElementById("btn-sair-home");
+            if (btnSairHome) {
+                btnSairHome.addEventListener("click", function () {
+                    localStorage.removeItem("cafe_sessao");
+                    localStorage.removeItem("cafe_usuario_nome");
+                    localStorage.removeItem("cafe_quiz_atual");
+                    window.location.reload();
+                });
+            }
+        }
+    }
+
+    atualizarNavbarSessao();
+
+
     // BARRA DE ACESSIBILIDADE
 
     const aumentarFonte = document.getElementById("aumentar-fonte");
@@ -353,39 +388,4 @@ document.addEventListener("DOMContentLoaded", function () {
             atualizarIconeTema();
         });
     }
-
-
-    // GERENCIAMENTO DE SESSÃO NO LOCALSTORAGE (NAVBAR)
-    function atualizarNavbarSessao() {
-        const authContainer = document.getElementById("auth-container");
-        if (!authContainer) return;
-
-        let sessao = null;
-        try {
-            sessao = JSON.parse(localStorage.getItem("cafe_sessao") || "null");
-        } catch (e) {
-            sessao = null;
-        }
-
-        if (sessao && sessao.logado) {
-            const primeiroNome = sessao.primeiroNome || (sessao.nome ? sessao.nome.split(" ")[0] : "Cliente");
-            authContainer.innerHTML = `
-                <span class="nav-user" style="padding: 6px 12px; border-radius: 6px; background: var(--cor-bege); color: var(--cor-marrom-cafe); font-weight: 600; font-size: 0.9rem;">Olá, ${primeiroNome}</span>
-                <a href="../TELA DESTAQUES/destaques.html" class="btn-primary btn-auth">Painel</a>
-                <button type="button" id="btn-sair-home" class="btn-secondary btn-auth">Sair</button>
-            `;
-
-            const btnSairHome = document.getElementById("btn-sair-home");
-            if (btnSairHome) {
-                btnSairHome.addEventListener("click", function () {
-                    localStorage.removeItem("cafe_sessao");
-                    localStorage.removeItem("cafe_usuario_nome");
-                    localStorage.removeItem("cafe_quiz_atual");
-                    window.location.reload();
-                });
-            }
-        }
-    }
-
-    atualizarNavbarSessao();
 });

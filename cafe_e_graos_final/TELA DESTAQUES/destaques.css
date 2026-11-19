@@ -23,15 +23,30 @@ body {
     min-height: 100vh;
 }
 
-/* --- NAVBAR (Fluida de ponta a ponta) --- */
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #C87D55;
+    outline-offset: 3px;
+}
+
+/* --- NAVBAR PADRONIZADA (Fluida de ponta a ponta) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    gap: 20px;
+    width: 100%;
+    padding: 16px 40px;
     background-color: var(--cor-creme);
     border-bottom: 1px solid var(--cor-taupe);
-    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     margin-bottom: 40px;
 }
 
@@ -42,21 +57,24 @@ body {
 }
 
 .logo-circle {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--cor-taupe);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
 }
 
 .logo-circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.65);
+    mix-blend-mode: multiply;
 }
 
 .brand-name {
@@ -67,8 +85,9 @@ body {
 
 .nav-links {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
+    gap: 24px;
 }
 
 .nav-item {
@@ -76,21 +95,23 @@ body {
     color: var(--cor-marrom-medio);
     font-size: 0.95rem;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover,
+.nav-item.active {
     color: var(--cor-marrom-cafe);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .nav-user {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--cor-marrom-cafe);
     background-color: var(--cor-bege);
     padding: 6px 12px;
     border-radius: 6px;
+    white-space: nowrap;
 }
 
 .btn-sair {
@@ -102,6 +123,7 @@ body {
     cursor: pointer;
     color: var(--cor-marrom-medio);
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .btn-sair:hover {
@@ -240,7 +262,7 @@ body {
     font-family: monospace;
 }
 
-/* Posiciona a barra na vertical, no canto esquerdo da página */
+/* --- BARRA DE ACESSIBILIDADE VERTICAL (ESTILO ORIGINAL PRESERVADO) --- */
 .barra-acessibilidade {
     position: fixed;
     top: 50%;
@@ -252,26 +274,9 @@ body {
     gap: 10px;
 
     z-index: 1000;
-    width: max-content; /* Garante que a div não estique e atrapalhe os cliques do site */
+    width: max-content;
 }
 
-/* --- BARRA DE ACESSIBILIDADE VERTICAL --- */
-
-/* Posiciona a barra na vertical no canto esquerdo */
-.barra-acessibilidade {
-    position: fixed;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    z-index: 1000;
-}
-
-/* Personaliza os botões de acessibilidade */
 .barra-acessibilidade button {
     display: flex;
     align-items: center;
@@ -292,50 +297,49 @@ body {
     font-weight: 500;
 }
 
-/* Altera a cor dos botões de acessibilidade */
 .barra-acessibilidade button:hover {
     background-color: var(--cor-taupe);
 }
 
-/* Destaca os botões pelo teclado */
 .barra-acessibilidade button:focus-visible {
     outline: 3px solid var(--cor-marrom-cafe);
     outline-offset: 3px;
 }
 
 /* --- TEMA ESCURO --- */
-
-/* 1. Define a paleta do modo escuro */
 body.modo-escuro {
-    --escuro-fundo: #211813;       /* Fundo geral da página */
-    --escuro-superficie: #35271F;  /* Fundo dos cards e navbar */
-    --escuro-campo: #49372D;       /* Fundos de apoio e hover */
-    --escuro-texto: #F8EEDF;       /* Cor dos títulos e textos principais */
-    --escuro-secundario: #E0C8B3;  /* Cor de textos de apoio e subtítulos */
-    --escuro-destaque: #D4AD89;    /* Destaques e botões */
-    --escuro-borda: #A88A73;       /* Bordas em geral */
+    --escuro-fundo: #211813;
+    --escuro-superficie: #35271F;
+    --escuro-campo: #49372D;
+    --escuro-texto: #F8EEDF;
+    --escuro-secundario: #E0C8B3;
+    --escuro-destaque: #D4AD89;
+    --escuro-borda: #A88A73;
 
     background-color: var(--escuro-fundo);
     color: var(--escuro-texto);
 }
 
-/* 2. Textos em Negrito (Destaques no parágrafo) */
 .modo-escuro strong {
     color: var(--escuro-destaque);
 }
 
-/* 3. Navbar (Topo) */
 .modo-escuro .navbar {
     background-color: var(--escuro-superficie);
     border-bottom: 1px solid var(--escuro-borda);
 }
 
-.modo-escuro .nav-brand .brand-name{
+.modo-escuro .logo-circle {
+    background-color: var(--escuro-texto);
+}
+
+.modo-escuro .nav-brand .brand-name {
     color: var(--escuro-texto);
 }
 
 .modo-escuro .nav-user {
-    color: var;
+    color: var(--escuro-texto);
+    background-color: var(--escuro-campo);
 }
 
 .modo-escuro .nav-links .nav-item {
@@ -347,7 +351,6 @@ body.modo-escuro {
     color: var(--escuro-destaque);
 }
 
-/* Botão Sair da Navbar */
 .modo-escuro .btn-sair {
     background-color: transparent;
     color: #ff9999;
@@ -359,7 +362,6 @@ body.modo-escuro {
     color: var(--escuro-fundo);
 }
 
-/* 4. Cabeçalho da Página */
 .modo-escuro .page-header h1 {
     color: var(--escuro-texto);
 }
@@ -368,7 +370,6 @@ body.modo-escuro {
     color: var(--escuro-secundario);
 }
 
-/* 5. Cards Gerais e Caixa Destaque */
 .modo-escuro .card {
     background-color: var(--escuro-superficie);
     border: 1px solid var(--escuro-borda);
@@ -383,12 +384,10 @@ body.modo-escuro {
     color: var(--escuro-secundario);
 }
 
-/* Reduz o brilho da imagem levemente no modo escuro para maior conforto visual */
 .modo-escuro .caixa-destaque img {
-    filter: brightness(0.85); 
+    filter: brightness(0.85);
 }
 
-/* 6. Botões */
 .modo-escuro .btn-primary {
     background-color: var(--escuro-destaque);
     color: var(--escuro-fundo);
@@ -399,7 +398,6 @@ body.modo-escuro {
     background-color: var(--escuro-texto);
 }
 
-/* 7. Rodapé (Footer) */
 .modo-escuro .footer {
     background-color: var(--escuro-fundo);
     border-top: 1px solid var(--escuro-borda);
@@ -409,7 +407,6 @@ body.modo-escuro {
     color: var(--escuro-secundario);
 }
 
-/* 8. Barra de Acessibilidade Lateral */
 .modo-escuro .barra-acessibilidade button {
     background-color: var(--escuro-superficie);
     color: var(--escuro-texto);
@@ -424,4 +421,30 @@ body.modo-escuro {
 .modo-escuro button:focus-visible {
     outline: 3px solid var(--escuro-destaque);
     outline-offset: 3px;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 14px 10px;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 12px;
+    }
 }
