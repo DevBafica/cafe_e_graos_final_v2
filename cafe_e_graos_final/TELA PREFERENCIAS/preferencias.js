@@ -229,32 +229,88 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Gera recomendações personalizadas com base nas respostas do Quiz
     const catalogoCafes = [
         {
-            nome: "Café Chapada Diamantina Gourmet",
-            notas: "Notas de chocolate amargo, castanha e doçura natural de rapadura.",
-            tags: ["chocolate", "castanhas"],
-            intensidadeIdeal: 7,
-            imagem: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80"
-        },
-        {
-            nome: "Café Reserva Sul de Minas",
-            notas: "Notas marcantes de caramelo cremoso, nozes e aroma floral delicado.",
-            tags: ["caramelo", "castanhas", "floral"],
+            nome: "Café Tradicional",
+            notas: "Corpo aveludado, com notas de caramelo e chocolate ao leite.",
+            tags: ["caramelo", "chocolate"],
             intensidadeIdeal: 5,
-            imagem: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80"
+            imagem: "../TELA PRODUTOS/img/cafe_tradicional.jpg"
         },
         {
-            nome: "Café Serra da Mantiqueira Frutado",
-            notas: "Aroma floral envolvente com notas cítricas suaves e finalização de frutas vermelhas.",
-            tags: ["frutas", "floral", "citrico"],
-            intensidadeIdeal: 4,
-            imagem: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=300&q=80"
-        },
-        {
-            nome: "Café Cerrado Mineiro Torra Intensa",
-            notas: "Corpo denso, notas profundas de cacau 70%, amêndoas tostadas e baixa acidez.",
-            tags: ["chocolate", "caramelo"],
+            nome: "Café Expresso",
+            notas: "Sabor concentrado, aroma intenso, acidez cítrica e finalização achocolatada.",
+            tags: ["citrico", "chocolate"],
             intensidadeIdeal: 9,
-            imagem: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80"
+            imagem: "../TELA PRODUTOS/img/cafe_expresso.jpg"
+        },
+        {
+            nome: "Café com Leite",
+            notas: "Bebida cremosa e suave, com notas de castanha e a doçura do leite.",
+            tags: ["castanhas"],
+            intensidadeIdeal: 3,
+            imagem: "../TELA PRODUTOS/img/cafe_com_leite.jpg"
+        },
+        {
+            nome: "Cappuccino",
+            notas: "Café expresso, leite vaporizado e espuma, com textura cremosa e equilibrada.",
+            tags: [],
+            intensidadeIdeal: 5,
+            imagem: "../TELA PRODUTOS/img/cappuccino.jpg"
+        },
+        {
+            nome: "Café Mocha",
+            notas: "Café expresso com chocolate e leite cremoso, de sabor mais doce.",
+            tags: ["chocolate"],
+            intensidadeIdeal: 4,
+            imagem: "../TELA PRODUTOS/img/cafe_mocha.jpg"
+        },
+        {
+            nome: "Café Latte",
+            notas: "Café expresso com bastante leite vaporizado, sabor suave e textura cremosa.",
+            tags: [],
+            intensidadeIdeal: 2,
+            imagem: "../TELA PRODUTOS/img/cafe_latte.jpg"
+        },
+        {
+            nome: "Café Macchiato",
+            notas: "Café expresso intenso, suavizado por uma pequena porção de espuma de leite.",
+            tags: [],
+            intensidadeIdeal: 8,
+            imagem: "../TELA PRODUTOS/img/cafe_macchiato.jpg"
+        },
+        {
+            nome: "Café Americano",
+            notas: "Expresso com água quente, de corpo leve e sabor menos concentrado.",
+            tags: [],
+            intensidadeIdeal: 4,
+            imagem: "../TELA PRODUTOS/img/cafe_americano.jpg"
+        },
+        {
+            nome: "Affogato",
+            notas: "Sobremesa com sorvete de baunilha e uma dose de expresso quente.",
+            tags: [],
+            intensidadeIdeal: 5,
+            imagem: "../TELA PRODUTOS/img/cafe_affogato.jpg"
+        },
+        {
+            nome: "Cold Brew",
+            notas: "Café extraído em água fria, servido gelado e de sabor suave.",
+            tags: [],
+            intensidadeIdeal: 2,
+            imagem: "../TELA PRODUTOS/img/cafe_coldbrew.jpg"
+        },
+        {
+            nome: "Café Cortado",
+            notas: "Expresso com um pouco de leite quente, de sabor equilibrado e cremoso.",
+            tags: [],
+            intensidadeIdeal: 6,
+            imagem: "../TELA PRODUTOS/img/cafe_cortado.jpg"
+        },
+        {
+            nome: "Café com Chantilly",
+            notas: "Café expresso com cobertura de chantilly, unindo intensidade e doçura.",
+            tags: [],
+            intensidadeIdeal: 6,
+            imagem: "../TELA PRODUTOS/img/cafe_chantilly.jpg"
         }
     ];
 
